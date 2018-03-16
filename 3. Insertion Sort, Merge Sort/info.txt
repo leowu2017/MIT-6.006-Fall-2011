@@ -1,0 +1,10 @@
+3. Insertion Sort, Merge Sort
+
+a. Insertion sort
+
+b. Insertion sort with binary search
+
+c. Merge sort
+
+Youtube link:
+https://youtu.be/Kg4bqzAqRBM
