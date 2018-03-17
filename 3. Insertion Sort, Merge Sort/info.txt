@@ -1,10 +1,17 @@
 3. Insertion Sort, Merge Sort
 
 a. Insertion sort
+time complexity: θ(n ^ 2)
+memory comlexity: θ(1)
 
 b. Insertion sort with binary search
+if memory swaping time can be ignored compared to value comparison,
+time complexity: θ(n * lg(n))
+memory comlexity: θ(1)
 
 c. Merge sort
+time complexity: θ(n * lg(n))
+memory comlexity: θ(n)
 
 Youtube link:
 https://youtu.be/Kg4bqzAqRBM

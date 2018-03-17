@@ -12,6 +12,7 @@ typedef array<int, ARRAY_SIZE> Array;
 
 ostream& operator<<(ostream& os, const Array& arr);
 void shuffle(Array& arr);
+int search(int val, int* arr, int toIdx);
 void sort(Array& arr);
 
 int main(int argc, char** argv) {
@@ -52,19 +53,34 @@ void shuffle(Array& arr) {
 	}
 }
 
+// Binary search
+int search(int val, int* arr, int toIdx) {
+	int midIdx = toIdx / 2;
+	if (val > arr[midIdx])
+		if (midIdx == toIdx)
+			return midIdx + 1;
+		else
+			return midIdx + 1 + search(val, &arr[midIdx + 1], toIdx - midIdx - 1);
+	else if (val < arr[midIdx])
+		if (midIdx == 0)
+			return 0;
+		else
+			return search(val, arr, midIdx - 1);
+	else
+		return midIdx;
+}
+
 // Merge sort
 void sort(Array& arr) {
 	if (ARRAY_SIZE <= 1)
 		return;
 	for (int i = 1; i < ARRAY_SIZE; ++i) {
 		int val = arr[i];
-		for (int j = 0; j < i; ++j) {
-			if (val < arr[j]) {
-				for (int k = i; k > j; --k)
-					arr[k] = arr[k - 1];
-				arr[j] = val;
-				break;
-			}
+		int insertionIdx = search(val, &arr[0], i);
+		if (insertionIdx != i) {
+			val = arr[i];
+			memmove(&arr[insertionIdx + 1], &arr[insertionIdx], (i - insertionIdx) * sizeof(int));
+			arr[insertionIdx] = val;
 		}
 	}
 }
