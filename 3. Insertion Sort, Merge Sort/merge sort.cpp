@@ -2,6 +2,7 @@
 #include <array>
 #include <iostream>
 #include <chrono>
+#include <string.h>
 
 #define ARRAY_SIZE 10000
 #define SHUFFLE_TIMES 30000
@@ -13,7 +14,7 @@ typedef array<int, ARRAY_SIZE> Array;
 ostream& operator<<(ostream& os, const Array& arr);
 void shuffle(Array& arr);
 int search(int val, int* arr, int toIdx);
-void sort(Array& arr);
+void sort(int *arr, long size);
 
 int main(int argc, char** argv) {
 	int seed = 0;
@@ -29,9 +30,9 @@ int main(int argc, char** argv) {
 	// shuffle array
 	shuffle(arr);
 	//cout << "Original: " << arr << endl;
-	// insertion sort
+	// merge sort
 	auto startTime = chrono::high_resolution_clock::now();
-	sort(arr);
+	sort(&arr[0], arr.size());
 	auto endTime = chrono::high_resolution_clock::now();
 	auto diff = endTime - startTime;
 	//cout << "Sorted: " << arr << endl;
@@ -41,7 +42,7 @@ int main(int argc, char** argv) {
 
 // shuffle a STL array
 void shuffle(Array& arr) {
-	for (int i = 0; i < SHUFFLE_TIMES; ++i) {
+	for (long i = 0; i < SHUFFLE_TIMES; ++i) {
 		int x = rand() % ARRAY_SIZE;
 		int y;
 		do {
@@ -53,36 +54,22 @@ void shuffle(Array& arr) {
 	}
 }
 
-// Binary search
-int search(int val, int* arr, int toIdx) {
-	int midIdx = toIdx / 2;
-	if (val > arr[midIdx])
-		if (midIdx == toIdx)
-			return midIdx + 1;
-		else
-			return midIdx + 1 + search(val, &arr[midIdx + 1], toIdx - midIdx - 1);
-	else if (val < arr[midIdx])
-		if (midIdx == 0)
-			return 0;
-		else
-			return search(val, arr, midIdx - 1);
-	else
-		return midIdx;
-}
-
-// insertion sort
-void sort(Array& arr) {
-	if (ARRAY_SIZE <= 1)
+// merge sort
+void sort(int *arr, long size) {
+	if (size < 2)
 		return;
-	for (int i = 1; i < ARRAY_SIZE; ++i) {
-		int val = arr[i];
-		int insertionIdx = search(val, &arr[0], i);
-		if (insertionIdx != i) {
-			val = arr[i];
-			memmove(&arr[insertionIdx + 1], &arr[insertionIdx], (i - insertionIdx) * sizeof(int));
-			arr[insertionIdx] = val;
-		}
+	long midIdx = size / 2;
+	sort(arr, midIdx);
+	sort(arr + midIdx, size - midIdx);
+	int left = 0, right = midIdx;
+	int tmpArr[size];
+	for (long idx = 0; idx < size; ++idx) {
+		if (left < midIdx && (arr[left] < arr[right] || right >= size))
+			tmpArr[idx] = arr[left++];
+		else
+			tmpArr[idx] = arr[right++];
 	}
+	memcpy(arr, tmpArr, size * sizeof(int));
 }
 
 // cout STL array

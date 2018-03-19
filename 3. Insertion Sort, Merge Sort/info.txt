@@ -13,5 +13,8 @@ c. Merge sort
 time complexity: θ(n * lg(n))
 memory comlexity: θ(n)
 
+Result:
+merge sort (2 ms) > insertion sort with binary search (6 ms) > insertion sort (500 ms)
+
 Youtube link:
 https://youtu.be/Kg4bqzAqRBM

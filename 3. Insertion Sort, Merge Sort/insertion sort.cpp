@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 	// shuffle array
 	shuffle(arr);
 	//cout << "Original: " << arr << endl;
-	// merge sort
+	// insertion sort
 	auto startTime = chrono::high_resolution_clock::now();
 	sort(arr);
 	auto endTime = chrono::high_resolution_clock::now();
@@ -52,7 +52,7 @@ void shuffle(Array& arr) {
 	}
 }
 
-// Merge sort
+// insertion sort
 void sort(Array& arr) {
 	if (ARRAY_SIZE <= 1)
 		return;
