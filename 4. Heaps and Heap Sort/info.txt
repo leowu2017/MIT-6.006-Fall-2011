@@ -1,0 +1,7 @@
+1. max_heapify
+correct a single violation of heap property in a subtree's root
+
+2. build_max_heap
+produce a max heap from an unsorted array
+
+3. heap sort
