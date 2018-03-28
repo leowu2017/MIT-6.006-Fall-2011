@@ -20,7 +20,7 @@ void max_heapify(vector<int> &arr, int idx) {
 	int rightIdx = idx * 2 + 2;
 	if (leftIdx >= arrLen || (rightIdx >= arrLen && arr[idx] > arr[leftIdx]) || (arr[idx] > arr[leftIdx] && arr[idx] > arr[rightIdx]))
 		return;
-	else if (leftIdx >= arrLen || arr[leftIdx] >= arr[rightIdx]) {
+	else if (rightIdx >= arrLen || arr[leftIdx] >= arr[rightIdx]) {
 		int tmp = arr[idx];
 		arr[idx] = arr[leftIdx];
 		arr[leftIdx] = tmp;
