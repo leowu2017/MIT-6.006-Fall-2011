@@ -1,7 +1,16 @@
 1. max_heapify
 correct a single violation of heap property in a subtree's root
+time complexity: θ(lg(n))
 
 2. build_max_heap
 produce a max heap from an unsorted array
+time complexity: θ(n)
 
 3. heap sort
+time complexity: θ(n * lg(n))
+a. build max heap from unsorted array, A. time complexity: θ(n)
+b. find max element A[1]. time complexity: θ(1)
+c. swap element A[1] with A[n]. time complexity: θ(1)
+d. decrementing heap size.
+e. max_heapify on root A[1]. time complexity: θ(lg(n))
+f. repeat from b. to e.
