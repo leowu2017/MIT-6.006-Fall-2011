@@ -13,10 +13,9 @@ typedef array<int, ARRAY_SIZE> Array;
 
 ostream& operator<<(ostream& os, const Array& arr);
 void shuffle(Array& arr);
-int search(int val, int* arr, int toIdx);
 void sort(Array &arr);
 void build_max_heap(Array &arr);
-void max_heapify(int* arr, int idx, int length);
+void max_heapify(Array &arr, int idx, int length);
 
 int main(int argc, char** argv) {
 	int seed = 0;
@@ -66,17 +65,17 @@ void sort(Array &arr) {
 		int tmp = arr[0];
 		arr[0] = arr[size];
 		arr[size] = tmp;
-		max_heapify(&arr[0], 0, size);
+		max_heapify(arr, 0, size);
 	}
 }
 
 void build_max_heap(Array &arr) {
 	int arrLen = arr.size();
 	for (int i = (arrLen - 1) / 2; i >= 0; --i)
-		max_heapify(&arr[0], i, arrLen);
+		max_heapify(arr, i, arrLen);
 }
 
-void max_heapify(int *arr, int idx, int length) {
+void max_heapify(Array &arr, int idx, int length) {
 	int leftIdx = idx * 2 + 1;
 	int rightIdx = idx * 2 + 2;
 	if (leftIdx >= length || (rightIdx >= length && arr[idx] > arr[leftIdx]) || (arr[idx] > arr[leftIdx] && arr[idx] > arr[rightIdx]))
